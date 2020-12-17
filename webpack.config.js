@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 
 
@@ -32,14 +33,22 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
   mode: 'development',
   devServer: {
-    publicPath: '/public'
+    publicPath: '/public',
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    }
   },
 
   output: {
     path: path.resolve(__dirname, 'public'),
   },
 
-  plugins: [new webpack.ProgressPlugin()],
+  plugins: [
+    new webpack.ProgressPlugin(),
+    new Dotenv()
+  ],
 
   module: {
     rules: [{

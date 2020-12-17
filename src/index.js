@@ -1,16 +1,7 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DiagnosticForm from './Diagnostic.jsx'
+import App from './App.js';
 
-
-class App extends React.Component {
-    render() {
-        return (
-            <DiagnosticForm />
-        )
-    }
-}
 
 
 
