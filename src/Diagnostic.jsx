@@ -2,27 +2,33 @@ import React from 'react'
 import axios from './axios.js'
 import { useFormik } from 'Formik'
 import * as Yup from 'yup'
+import Base64 from 'base-64'
 
 
 
 const validationSchema = Yup.object().shape({
     age: Yup.number().required("Required").positive().integer(),
     sex: Yup.string().required(),
-    location: Yup.string().required()
+    location: Yup.string().required(),
+    image: Yup.mixed().required("Required")
 })
 
 const DiagnosticForm = () => {
     const formik = useFormik({
-        initialValues: {sex: "male" , age: "", location: "head" },
+        initialValues: {sex: "male" , age: "", location: "head"},
         validationSchema,
         onSubmit: (values) => {
+            values.image = Base64.encode(values.image)
             axios.post('/api/submit', values).then((response) => console.log(response))
         }
     })
     return (
         <form onSubmit={formik.handleSubmit}>
             <label htmlFor="">Lesion Image</label>
-            <input name="image" type="File" />
+            <input name="image" type="File" onChange={e => {
+                formik.setFieldValue("image", e.currentTarget.files[0]);
+            }} />
+            <div className="error">{formik.errors.age}</div> 
             <label htmlFor="age">Age</label>
             <input name="age" value={formik.values.age} onChange={formik.handleChange} />
             <div className="error">{formik.errors.age}</div> 
