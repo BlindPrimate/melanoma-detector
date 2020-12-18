@@ -1,17 +1,25 @@
-import React from 'react';
+import React from 'react'
 import axios from './axios.js'
+import { Formik } from 'Formik'
 
 
 class DiagnosticForm extends React.Component {
     constructor(props) {
         super(props)
+        this.fileRef = React.createRef()
+        // this.onSubmitHandler = this.onSubmitHandler.bind(this)
         this.state = {
             formData: {
                 sex: "male",
                 age: 18,
-                location: "head"
+                location: "head",
+                image: this.fileRef.current
             }
         }
+    }
+
+    formValid() {
+
     }
 
     generateAges() {
@@ -23,9 +31,11 @@ class DiagnosticForm extends React.Component {
         return result
     }
 
-    onSubmitHandler() {
+    onSubmitHandler(e) {
+        e.preventDefault()
+        console.log(this.fileRef.current.files[0].name)
         const req = axios.post('/api/submit', {...this.state.formData})
-        req.then(console.log("boom"))
+        req.then((response) => console.log(response))
     }
 
     onChangeHanlder(event, fieldName) {
@@ -35,9 +45,9 @@ class DiagnosticForm extends React.Component {
     render() {
         return(
             <div>
-            <form onSubmit={this.onSubmitHandler()}>
+            <form onSubmit={(e) => this.onSubmitHandler(e)}>
                 <label htmlFor="">Lesion Image</label>
-                <input type="File" />
+                <input type="File" ref={this.fileRef} />
                 <label htmlFor="">Age</label>
                 <select value={this.state.formData.age} onChange={(e) => this.onChangeHanlder(e, "age")}>
                     {this.generateAges()}
