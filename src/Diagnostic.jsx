@@ -1,76 +1,47 @@
 import React from 'react'
 import axios from './axios.js'
-import { Formik } from 'Formik'
+import { useFormik } from 'Formik'
+import * as Yup from 'yup'
 
 
-class DiagnosticForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.fileRef = React.createRef()
-        // this.onSubmitHandler = this.onSubmitHandler.bind(this)
-        this.state = {
-            formData: {
-                sex: "male",
-                age: 18,
-                location: "head",
-                image: this.fileRef.current
-            }
+
+const validationSchema = Yup.object().shape({
+    age: Yup.number().required("Required").positive().integer(),
+    sex: Yup.string().required(),
+    location: Yup.string().required()
+})
+
+const DiagnosticForm = () => {
+    const formik = useFormik({
+        initialValues: {sex: "male" , age: "", location: "head" },
+        validationSchema,
+        onSubmit: (values) => {
+            axios.post('/api/submit', values).then((response) => console.log(response))
         }
-    }
+    })
+    return (
+        <form onSubmit={formik.handleSubmit}>
+            <label htmlFor="">Lesion Image</label>
+            <input name="image" type="File" />
+            <label htmlFor="age">Age</label>
+            <input name="age" value={formik.values.age} onChange={formik.handleChange} />
+            <div className="error">{formik.errors.age}</div> 
+            <label htmlFor="sex">Sex</label>
+            <select name="sex" value={formik.values.sex} onChange={formik.handleChange}>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <label htmlFor="location">Location</label>
+            <select name="location" value={formik.values.location} onChange={formik.handleChange}>
+                <option value="head">Head</option>
+                <option value="torso">Torso</option>
+                <option value="leg">Leg</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    )
 
-    formValid() {
-
-    }
-
-    generateAges() {
-        let result = []
-        for (let i = 18; i < 100; i++) {
-            const option = <option>{i}</option>
-            result.push(option)
-        }
-        return result
-    }
-
-    onSubmitHandler(e) {
-        e.preventDefault()
-        console.log(this.fileRef.current.files[0].name)
-        const req = axios.post('/api/submit', {...this.state.formData})
-        req.then((response) => console.log(response))
-    }
-
-    onChangeHanlder(event, fieldName) {
-        this.setState({formData: { ...this.state.formData, [fieldName]: event.target.value} })
-    }
-
-    render() {
-        return(
-            <div>
-            <form onSubmit={(e) => this.onSubmitHandler(e)}>
-                <label htmlFor="">Lesion Image</label>
-                <input type="File" ref={this.fileRef} />
-                <label htmlFor="">Age</label>
-                <select value={this.state.formData.age} onChange={(e) => this.onChangeHanlder(e, "age")}>
-                    {this.generateAges()}
-                </select>
-                <label htmlFor="">Sex</label>
-                <select value={this.state.formData.sex} onChange={(e) => this.onChangeHanlder(e, "sex")}>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-                <label htmlFor="">Location</label>
-                <select value={this.state.formData.location} onChange={(e) => this.onChangeHanlder(e, "location")}>
-                    <option value="head">Head</option>
-                    <option value="torso">Torso</option>
-                    <option value="leg">Leg</option>
-                </select>
-                <button>Submit</button>
-            </form>
-            <p>{this.state.formData.sex}</p>
-            <p>{this.state.formData.age}</p>
-            <p>{this.state.formData.location}</p>
-            </div>
-        )
-    }
 }
+
 
 export default DiagnosticForm;
