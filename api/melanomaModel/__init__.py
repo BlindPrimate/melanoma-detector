@@ -8,32 +8,29 @@ import numpy as np
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.linear_model import LogisticRegression
-
+import pickle
 import os
 
 file_path = os.path.dirname(os.path.realpath(__file__))
-data_path = os.path.join(file_path, "data", "siim-isic-melanoma-classification")
 
 
-df = pd.read_csv(os.path.join(data_path, "train.csv"))
+def load_image_model():
+    with open(os.path.join(file_path, 'model_patient_image.pkl'), 'rb') as file:
+        model = pickle.load(file)
+        return model
 
-print(df.head())
+def load_patient_details_model():
+    with open(os.path.join(file_path, 'model_patient_details.pkl'), 'rb') as file:
+        model = pickle.load(file)
+        return model
 
-images = []
-for x in df['image_name']:
-    image = os.path.join(data_path, 'train',  x + '.dcm')
-    ds = dicom.dcmread(image)
-    pixels = ds.pixel_array
-    images.append(pixels.flatten())
 
-images = tf.keras.preprocessing.sequence.pad_sequences(
-  images,
-  maxlen = 720,
-  dtype = "int32",
-  padding = "pre",
-  truncating = "pre",
-  value = 0
-)
+Patient_model = load_patient_details_model()
+Image_model = load_image_model()
+
 
 if __name__ == '__main__':
-    pass
+    arr = [[55,0,0,0,1,1,0]]
+    print( Patient_model.predict(arr) )
+    # print( Image_model.predict(arr) )
+

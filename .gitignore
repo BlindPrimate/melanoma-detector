@@ -5,3 +5,4 @@
 /public/
 /.env
 /api/melanomaModel/data/
+/api/melanomaModel/__pycache__/

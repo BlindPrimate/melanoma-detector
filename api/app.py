@@ -3,9 +3,12 @@ from flask import Flask
 from flask import request, jsonify
 from random import getrandbits
 from flask_cors import CORS
+from api.melanomaModel import Patient_model
+from api.melanomaModel import Image_model
 
 app = Flask(__name__)
 CORS(app)
+
 
 @app.route('/api/submit', methods=['post'])
 def submit_info():
@@ -21,4 +24,6 @@ def test():
     return "Boom"
 
 if __name__ == '__main__':
-    app.run()
+    # Patient_model.predict([55, 0, 0, 0, 1, 1, 0])
+    Image_model.predict([55,0,0,0,1,1,0])
+    # app.run()

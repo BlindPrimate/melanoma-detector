@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cp ./src/index.html ./public/index.html && webpack",
-    "dev": "cp ./src/index.html ./public/index.html && webpack s"
+    "dev": "webpack s"
   },
   "repository": {
     "type": "git",
