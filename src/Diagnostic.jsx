@@ -18,8 +18,12 @@ const DiagnosticForm = () => {
         initialValues: {sex: "male" , age: "", location: "head"},
         validationSchema,
         onSubmit: (values) => {
-            values.image = Base64.encode(values.image)
-            axios.post('/api/submit', values).then((response) => console.log(response))
+            // values.image = Base64.encode(values.image)
+            let formdata = new FormData()
+            formdata.append("patientData", JSON.stringify(values))
+            formdata.append("image", formik.values.image)
+            axios.post('/api/submit', formdata, {headers: {'Content-Type': 'multipart/form-data'}})
+                .then((response) => console.log(response))
         }
     })
     return (
