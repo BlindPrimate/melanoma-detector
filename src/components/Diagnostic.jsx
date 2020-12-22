@@ -1,8 +1,8 @@
 import React from 'react'
-import axios from './axios.js'
+import axios from '../services/axios.jsx'
 import { useFormik } from 'Formik'
 import * as Yup from 'yup'
-import Base64 from 'base-64'
+import "./Diagnostic.scss"
 
 
 
