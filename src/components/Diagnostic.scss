@@ -1,13 +1,25 @@
 
-form {
+#diagnostic-form {
+    margin: 0 auto;
+    label {
+        font-size: 1.2em;
+        margin-left: 3px;
+        margin-bottom: 5px;
+        margin-top: 15px;
+    }
+    .error {
+        margin-top: 3px;
+        margin-left: 3px;
+        color: red;
+    }
+    padding: 50px 0;
     & > * {
         display: block;
     }
     & > input, select {
-        margin-bottom: 15px;
+        padding: 5px;
     }
-    label {
-        font-size: 1.2em;
-        margin-bottom: 1px;
+    button {
+        margin-top: 15px;
     }
 }

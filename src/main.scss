@@ -7,8 +7,27 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+input, select {
+    border: 1px solid rgba(200, 200, 200, 0.5);
+    box-shadow: 1px 0 5px rgba(200, 200, 200, 0.5);
+    border-radius: 5px;
+}
+
+input[type="File"] {
+    padding: 20px;
+    background: darken(#f2f2fe, 2%);
+}
+
+button {
+    cursor: pointer;
+    border: 1px solid rgba(200, 200, 200, 0.7);
+    padding: 7px 12px;
+    box-shadow: 1px 0 3px rgba(200, 200, 200, 0.5);
+    border-radius: 5px;
+}
 
 .main-container {
     max-width: 700px;
     margin: 0 auto;
+    display: flex;
 }

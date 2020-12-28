@@ -27,7 +27,7 @@ const DiagnosticForm = () => {
         }
     })
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <form id="diagnostic-form" onSubmit={formik.handleSubmit}>
             <label htmlFor="">Lesion Image</label>
             <input name="image" type="File" onChange={e => {
                 formik.setFieldValue("image", e.currentTarget.files[0]);
