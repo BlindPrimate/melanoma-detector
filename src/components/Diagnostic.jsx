@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from '../services/axios.jsx'
 import { useFormik } from 'Formik'
 import * as Yup from 'yup'
@@ -14,41 +14,49 @@ const validationSchema = Yup.object().shape({
 })
 
 const DiagnosticForm = () => {
+    const [ diagnosis, setDiagnosis ] = useState();
     const formik = useFormik({
         initialValues: {sex: "male" , age: "", location: "head"},
         validationSchema,
         onSubmit: (values) => {
-            // values.image = Base64.encode(values.image)
             let formdata = new FormData()
             formdata.append("patientData", JSON.stringify(values))
             formdata.append("image", formik.values.image)
             axios.post('/api/submit', formdata, {headers: {'Content-Type': 'multipart/form-data'}})
-                .then((response) => console.log(response))
+                .then((response) => {
+                    setDiagnosis(response.data)
+                })
         }
     })
     return (
-        <form id="diagnostic-form" onSubmit={formik.handleSubmit}>
-            <label htmlFor="">Lesion Image</label>
-            <input name="image" type="File" onChange={e => {
-                formik.setFieldValue("image", e.currentTarget.files[0]);
-            }} />
-            <div className="error">{formik.errors.age}</div> 
-            <label htmlFor="age">Age</label>
-            <input name="age" value={formik.values.age} onChange={formik.handleChange} />
-            <div className="error">{formik.errors.age}</div> 
-            <label htmlFor="sex">Sex</label>
-            <select name="sex" value={formik.values.sex} onChange={formik.handleChange}>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
-            <label htmlFor="location">Location</label>
-            <select name="location" value={formik.values.location} onChange={formik.handleChange}>
-                <option value="head">Head</option>
-                <option value="torso">Torso</option>
-                <option value="leg">Leg</option>
-            </select>
-            <button type="submit">Submit</button>
-        </form>
+        <div>
+            {diagnosis ?
+                Number(diagnosis.result) ? <h1>Malignant</h1>  : <h1>Benign</h1>
+            :
+            <form id="diagnostic-form" onSubmit={formik.handleSubmit}>
+                <label htmlFor="">Lesion Image</label>
+                <input name="image" type="File" onChange={e => {
+                    formik.setFieldValue("image", e.currentTarget.files[0]);
+                }} />
+                <div className="error">{formik.errors.age}</div> 
+                <label htmlFor="age">Age</label>
+                <input name="age" value={formik.values.age} onChange={formik.handleChange} />
+                <div className="error">{formik.errors.age}</div> 
+                <label htmlFor="sex">Sex</label>
+                <select name="sex" value={formik.values.sex} onChange={formik.handleChange}>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <label htmlFor="location">Location</label>
+                <select name="location" value={formik.values.location} onChange={formik.handleChange}>
+                    <option value="head">Head</option>
+                    <option value="torso">Torso</option>
+                    <option value="leg">Leg</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+            }
+        </div>
     )
 
 }

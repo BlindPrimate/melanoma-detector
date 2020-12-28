@@ -29,15 +29,9 @@ def submit_info():
         value=0
     )
     image_result = Image_model.predict(processed_image)
-    print(image_result[0])
 
-    # return jsonify(result="boop")
     return jsonify(result=str(image_result[0]))
 
-
-@app.route('/api', methods=['get'])
-def test():
-    return "Boom"
 
 if __name__ == '__main__':
     app.run()
