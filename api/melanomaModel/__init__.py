@@ -17,9 +17,9 @@ df = pd.read_csv(os.path.join(file_path, "data", "siim-isic-melanoma-classificat
 
 
 def load_df():
-    with open(os.path.join(file_path, 'dataframe.pkl'), 'rb') as file:
-        df = pickle.load(file)
-        return df
+    with open(os.path.join(file_path, 'columns.txt'), 'rb') as file:
+        columns = pickle.load(file)
+        return pd.DataFrame(columns=columns)
 
 def load_image_model():
     with open(os.path.join(file_path, 'model_patient_image.pkl'), 'rb') as file:
@@ -31,21 +31,7 @@ def load_patient_details_model():
         model = pickle.load(file)
         return model
 
-# pd.set_option('display.max_columns', None)
 
-Patient_model = load_patient_details_model()
-Image_model = load_image_model()
-# df = load_df()
-# new_row = {
-#     "site_torso": 0,
-#     "site_lower extremity": 0,
-#     "site_upper extremity": 1,
-#     "sex_male": 0,
-#     "age_approx": 55
-# }
-# df = df.append(new_row, ignore_index=True)
-#
-# print(df)
-# print(Patient_model.predict([df.iloc[0]]))
+
 
 
