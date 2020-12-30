@@ -49,7 +49,7 @@ const DiagnosticForm = () => {
                 </select>
                 <label htmlFor="location">Location</label>
                 <select name="location" value={formik.values.location} onChange={formik.handleChange}>
-                    <option value="head">Head</option>
+                    <option value="arm">Arm</option>
                     <option value="torso">Torso</option>
                     <option value="leg">Leg</option>
                 </select>

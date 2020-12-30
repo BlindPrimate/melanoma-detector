@@ -15,11 +15,14 @@ file_path = os.path.dirname(os.path.realpath(__file__))
 
 df = pd.read_csv(os.path.join(file_path, "data", "siim-isic-melanoma-classification", "train.csv"))
 
-
-def load_df():
+def get_df_columns():
     with open(os.path.join(file_path, 'columns.txt'), 'rb') as file:
         columns = pickle.load(file)
-        return pd.DataFrame(columns=columns)
+        return columns
+
+def load_df():
+    columns = get_df_columns()
+    return pd.DataFrame(columns=columns)
 
 def load_image_model():
     with open(os.path.join(file_path, 'model_patient_image.pkl'), 'rb') as file:
