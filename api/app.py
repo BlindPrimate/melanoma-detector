@@ -63,7 +63,7 @@ def submit_info():
     print(image_result)
     print(detail_result)
 
-    final_result = round(detail_result * 0.4 + image_result * 0.6)
+    final_result = round(detail_result * 0.6 + image_result * 0.4)
 
 
     return jsonify(result=str(final_result))
