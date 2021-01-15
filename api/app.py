@@ -7,6 +7,7 @@ from api.melanomaModel import load_patient_details_model
 from api.melanomaModel import load_image_model
 from api.melanomaModel import load_df
 from api.melanomaModel import get_df_columns
+from api.melanomaModel import get_age_cancer_rate_data
 import pydicom as dicom
 
 
@@ -16,6 +17,11 @@ CORS(app)
 # model loading
 image_model = load_image_model()
 patient_details_model = load_patient_details_model()
+
+@app.route('/api/charts', methods=['get'])
+def get_charts():
+    data = get_age_cancer_rate_data()
+    print(data)
 
 
 @app.route('/api/submit', methods=['post'])

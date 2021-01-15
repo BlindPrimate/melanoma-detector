@@ -16,6 +16,29 @@ file_path = os.path.dirname(os.path.realpath(__file__))
 df = pd.read_csv(os.path.join(file_path, "data", "siim-isic-melanoma-classification", "train.csv"))
 
 pd.set_option('max_columns', None)
+
+def get_details_model_data():
+    pass
+
+def get_image_model_data():
+    pass
+
+def get_age_cancer_rate_data():
+    data = df[df['target'] == 1]
+    total_patients = len(df.index)
+    men, women = data.groupby('sex').size()
+    results = {
+        "total": total_patients,
+        "sex": {
+            "male": men,
+            "female": women
+        }
+    }
+    return results
+
+def get_location_cancer_rate_data():
+    pass
+
 def get_df_columns():
     with open(os.path.join(file_path, 'columns.txt'), 'rb') as file:
         columns = pickle.load(file)
