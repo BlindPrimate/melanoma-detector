@@ -15,6 +15,7 @@ file_path = os.path.dirname(os.path.realpath(__file__))
 
 df = pd.read_csv(os.path.join(file_path, "data", "siim-isic-melanoma-classification", "train.csv"))
 
+pd.set_option('max_columns', None)
 def get_df_columns():
     with open(os.path.join(file_path, 'columns.txt'), 'rb') as file:
         columns = pickle.load(file)

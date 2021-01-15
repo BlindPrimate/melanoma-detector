@@ -43,8 +43,6 @@ def submit_info():
 
     if form_data['sex'] == 'male':
         patient_dict['sex_male'] = 1
-    else:
-        patient_dict['sex_male'] = 0
 
     if form_data['location'] == 'arm':
         patient_dict['site_upper extremity'] = 1
@@ -53,17 +51,20 @@ def submit_info():
     elif form_data['location'] == 'torso':
         patient_dict['site_torso'] = 1
 
+    patient_dict['diagnosis_unknown'] = 1
+
     df = df.append(patient_dict, ignore_index=True)
-    detail_result = patient_details_model.predict(df)
+    detail_result = patient_details_model.predict_proba(df)
     detail_result = detail_result[0]
 
-    image_result = image_model.predict(processed_image)
+    image_result = image_model.predict_proba(processed_image)
     image_result = image_result[0]
 
-    print(image_result)
-    print(detail_result)
+    print(df)
+    print("Image model: " + str(image_result))
+    print("Details model: " + str(detail_result))
 
-    final_result = round(detail_result * 0.6 + image_result * 0.4)
+    final_result = round(detail_result + image_result / 2)
 
 
     return jsonify(result=str(final_result))
