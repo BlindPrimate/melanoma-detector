@@ -10,10 +10,13 @@ from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.linear_model import LogisticRegression
 import pickle
 import os
+import json
 
 file_path = os.path.dirname(os.path.realpath(__file__))
 
 df = pd.read_csv(os.path.join(file_path, "data", "siim-isic-melanoma-classification", "train.csv"))
+cancer_positive_patients = df[df['target'] == 1]
+cancer_positive_patients = cancer_positive_patients.rename(columns={'anatom_site_general_challenge': 'location'})
 
 pd.set_option('max_columns', None)
 
@@ -24,20 +27,16 @@ def get_image_model_data():
     pass
 
 def get_age_cancer_rate_data():
-    data = df[df['target'] == 1]
-    total_patients = len(df.index)
-    men, women = data.groupby('sex').size()
-    results = {
-        "total": total_patients,
-        "sex": {
-            "male": men,
-            "female": women
-        }
+    data = cancer_positive_patients.reindex(columns=['age_approx'])
+    ages = data.value_counts().sort_index(inplace=False)
+    return {
+        "labels": [i[0] for i in ages.index.values],
+        "count": ages.values.tolist()
     }
-    return results
 
 def get_location_cancer_rate_data():
-    pass
+    data = cancer_positive_patients.reindex(columns=['location'])
+    return data.value_counts()
 
 def get_df_columns():
     with open(os.path.join(file_path, 'columns.txt'), 'rb') as file:

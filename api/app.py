@@ -7,7 +7,7 @@ from api.melanomaModel import load_patient_details_model
 from api.melanomaModel import load_image_model
 from api.melanomaModel import load_df
 from api.melanomaModel import get_df_columns
-from api.melanomaModel import get_age_cancer_rate_data
+from api.melanomaModel import get_age_cancer_rate_data, get_location_cancer_rate_data
 import pydicom as dicom
 
 
@@ -20,8 +20,11 @@ patient_details_model = load_patient_details_model()
 
 @app.route('/api/charts', methods=['get'])
 def get_charts():
-    data = get_age_cancer_rate_data()
-    print(data)
+    data = {
+        "age": get_age_cancer_rate_data(),
+        # "location": get_location_cancer_rate_data()
+    }
+    return jsonify(data)
 
 
 @app.route('/api/submit', methods=['post'])
@@ -78,3 +81,4 @@ def submit_info():
 
 if __name__ == '__main__':
     app.run()
+    # print(get_age_cancer_rate_data())
