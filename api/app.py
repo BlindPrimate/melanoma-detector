@@ -8,6 +8,7 @@ from api.melanomaModel import load_image_model
 from api.melanomaModel import load_df
 from api.melanomaModel import get_df_columns
 from api.melanomaModel import get_age_cancer_rate_data, get_location_cancer_rate_data
+from api.melanomaModel import get_image_model_data, get_details_model_data
 import pydicom as dicom
 
 
@@ -22,7 +23,9 @@ patient_details_model = load_patient_details_model()
 def get_charts():
     data = {
         "age": get_age_cancer_rate_data(),
-        # "location": get_location_cancer_rate_data()
+        "location": get_location_cancer_rate_data(),
+        "details": get_details_model_data(),
+        "images": get_image_model_data(),
     }
     return jsonify(data)
 

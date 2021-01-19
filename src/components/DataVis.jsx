@@ -5,7 +5,11 @@ import "./DataVis.scss"
 
 
 const baseLayout = {
-    width: 600,
+    autosize: true
+}
+
+const baseConfig = {
+    responsive: true
 }
 
 const DataVis = () => {
@@ -20,7 +24,7 @@ const DataVis = () => {
     if (charts) {
 
     return (
-        <div>
+        <div id="charts">
             <Plot 
                 data = {[
                     {
@@ -33,8 +37,65 @@ const DataVis = () => {
                 layout = {{
                     ...baseLayout, 
                     title: "Cancer Patient Age Distribution",
+                    xaxis: { title: "Age of Patient"},
+                    yaxis: { title: "Number of Melanoma Cases"},
+                }}
+
+                config = {{...baseConfig}}
+            />
+            <Plot 
+                data = {[
+                    {
+                        x: charts.location.labels,
+                        y: charts.location.count,
+                        type: 'bar',
+                    }
+                ]}
+
+                layout = {{
+                    ...baseLayout, 
+                    title: "Cancer Location Distribution",
+                    xaxis: { title: "Location of Lesion"},
+                    yaxis: { title: "Number of Melanoma Cases"},
+                }}
+                config = {{...baseConfig}}
+            />
+            <Plot 
+                data = {[
+                    {
+                        x: charts.details.count,
+                        y: charts.details.labels,
+                        type: 'bar',
+                        orientation: 'h'
+                    }
+                ]}
+
+                layout = {{
+                    ...baseLayout, 
+                    title: "Patient Details Model Accuracy",
+                    xaxis: { title: "Accuracy", range: [0.9, 1]},
+                    yaxis: { title: "Model Type"},
 
                 }}
+                config = {{...baseConfig}}
+            />
+            <Plot 
+                data = {[
+                    {
+                        x: charts.images.count,
+                        y: charts.images.labels,
+                        type: 'bar',
+                        orientation: 'h'
+                    }
+                ]}
+
+                layout = {{
+                    ...baseLayout, 
+                    title: "Patient Image Model Accuracy",
+                    xaxis: { title: "Accuracy", range: [0, 1]},
+                    yaxis: { title: "Model Type"},
+                }}
+                config = {{...baseConfig}}
             />
         </div>
     )
