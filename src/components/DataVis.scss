@@ -1,0 +1,14 @@
+#charts {
+    width: 100%;
+    & > .chart-block {
+        flex: 1 1 100%;
+        display: flex;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        column-gap: 10px;
+    }
+    .chart {
+        flex: 1 0 50%;
+        border: 1px solid grey;
+    }
+}

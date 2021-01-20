@@ -7,6 +7,39 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.4em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+h5 { 
+    font-size: 1em;
+}
+
+h6 {
+    font-size: 0.8em;
+}
+
+p { 
+    font-size: 1.2em;
+    line-height: 1.35em;
+}
+
+a {
+    font-size: 1.2em;
+}
+
 input, select {
     border: 1px solid rgba(200, 200, 200, 0.5);
     box-shadow: 1px 0 5px rgba(200, 200, 200, 0.5);
@@ -27,7 +60,20 @@ button {
 }
 
 .main-container {
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
-    display: flex;
+    h1 {
+        text-align: center;
+    }
+    padding-bottom: 30px;
+}
+
+#references {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+        margin-bottom: 8px;
+    }
+
 }

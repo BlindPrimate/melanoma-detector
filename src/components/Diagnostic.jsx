@@ -29,7 +29,7 @@ const DiagnosticForm = () => {
         }
     })
     return (
-        <div>
+        <div id="diagnostic-form">
             {diagnosis ?
                 Number(diagnosis.result) ? <h1>Malignant</h1>  : <h1>Benign</h1>
             :
