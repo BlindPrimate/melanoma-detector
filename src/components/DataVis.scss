@@ -1,3 +1,5 @@
+@import "../styles/variables";
+
 #charts {
     width: 100%;
     & > .chart-block {
@@ -9,6 +11,7 @@
     }
     .chart {
         flex: 1 0 50%;
-        border: 1px solid grey;
+        border: 1px solid darken($main-color, 5%);
+        box-shadow: $primary-box-shadow;
     }
 }

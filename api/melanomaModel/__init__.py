@@ -24,13 +24,13 @@ pd.set_option('max_columns', None)
 def get_details_model_data():
     return {
         "labels": chart_details_arr[0],
-        "count": chart_details_arr[1]
+        "count": [i * 100 for i in chart_details_arr[1]]
     }
 
 def get_image_model_data():
     return {
         "labels": image_details_arr[0],
-        "count": image_details_arr[1]
+        "count": [i * 100 for i in image_details_arr[1]]
     }
 
 def get_age_cancer_rate_data():

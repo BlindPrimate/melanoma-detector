@@ -80,7 +80,7 @@ const DataVis = () => {
                     layout = {{
                         ...baseLayout, 
                         title: "Patient Details Model Accuracy",
-                        xaxis: { title: "Accuracy", range: [0.9, 1]},
+                        xaxis: { title: "Accuracy(%)", range: [90, 100]},
                         yaxis: { title: "Model Type"},
 
                     }}
@@ -100,7 +100,7 @@ const DataVis = () => {
                     layout = {{
                         ...baseLayout, 
                         title: "Patient Image Model Accuracy",
-                        xaxis: { title: "Accuracy", range: [0, .8]},
+                        xaxis: { title: "Accuracy(%)", range: [0, 80]},
                         yaxis: { title: "Model Type"},
                     }}
                     config = {{...baseConfig}}

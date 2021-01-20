@@ -7,7 +7,7 @@ class App extends React.Component {
     render() {
         return (
             <div className="main-container">
-                <h1>Melanoma Machine Learning Models</h1>
+                <h1 id="title">Melanoma Machine Learning Models</h1>
                 <p>Due to Favra Biomedical’s need for a more efficient means of identifying likely melanoma tumors based on simple data acquired from our partner Tumors R’ Us, a machine learning model will be chosen and implemented based on testing performance on provided training and testing data.  The initial analysis of the data and model testing is below.  The final model results can be seen by using the provided form below.  </p>
                 <DataVis />
                 <DiagnosticForm />
