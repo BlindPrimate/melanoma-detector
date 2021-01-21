@@ -5,7 +5,10 @@ import "./DataVis.scss"
 
 
 const baseLayout = {
-    autosize: true
+    autosize: true,
+    title: {
+        font: { size: 14}
+    }
 }
 
 const baseConfig = {
@@ -38,7 +41,10 @@ const DataVis = () => {
 
                     layout = {{
                         ...baseLayout, 
-                        title: "Cancer Patient Age Distribution",
+                        title: {
+                            ...baseLayout.title,
+                            text: "Cancer Patient Age Distribution",
+                        },
                         xaxis: { title: "Age of Patient"},
                         yaxis: { title: "Number of Melanoma Cases"},
                     }}
@@ -57,7 +63,10 @@ const DataVis = () => {
 
                     layout = {{
                         ...baseLayout, 
-                        title: "Cancer Location Distribution",
+                        title: {
+                            ...baseLayout.title,
+                            text: "Cancer Location Distribution",
+                        },
                         xaxis: { title: "Location of Lesion"},
                         yaxis: { title: "Number of Melanoma Cases"},
                     }}
@@ -79,7 +88,10 @@ const DataVis = () => {
 
                     layout = {{
                         ...baseLayout, 
-                        title: "Patient Details Model Accuracy",
+                        title: {
+                            ...baseLayout.title,
+                            text: "Patient Details Model Accuracies",
+                        },
                         xaxis: { title: "Accuracy(%)", range: [90, 100]},
                         yaxis: { title: "Model Type"},
 
@@ -99,7 +111,10 @@ const DataVis = () => {
 
                     layout = {{
                         ...baseLayout, 
-                        title: "Patient Image Model Accuracy",
+                        title: {
+                            ...baseLayout.title,
+                            text: "Patient Image Model Accuracies",
+                        },
                         xaxis: { title: "Accuracy(%)", range: [0, 80]},
                         yaxis: { title: "Model Type"},
                     }}

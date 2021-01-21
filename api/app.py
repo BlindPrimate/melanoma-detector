@@ -29,14 +29,8 @@ def get_charts():
     }
     return jsonify(data)
 
-
-@app.route('/api/submit', methods=['post'])
-def submit_info():
-    patient_dict_keys = get_df_columns()
-    patient_dict_values = [0 for i in range(len(patient_dict_keys))]
-
-    patient_dict = dict(zip(patient_dict_keys, patient_dict_values))
-    df = load_df()
+@app.route('/api/image/submit', methods=['post'])
+def submit_image():
     image = request.files['image']
     image = dicom.dcmread(image)
     pixels = image.pixel_array
@@ -49,7 +43,20 @@ def submit_info():
         truncating="pre",
         value=0
     )
+
+    image_result = image_model.predict(processed_image)
+
+    return jsonify(result=str(image_result))
+
+@app.route('/api/details/submit', methods=['post'])
+def submit_details():
+    patient_dict_keys = get_df_columns()
+    patient_dict_values = [0 for i in range(len(patient_dict_keys))]
+
+    patient_dict = dict(zip(patient_dict_keys, patient_dict_values))
+    df = load_df()
     form_data = json.loads(request.form['patientData'])
+
     # assign values to patient_dict from form submission
     patient_dict['age'] = form_data['age']
 
@@ -66,20 +73,10 @@ def submit_info():
     patient_dict['diagnosis_unknown'] = 1
 
     df = df.append(patient_dict, ignore_index=True)
-    detail_result = patient_details_model.predict_proba(df)
-    detail_result = detail_result[0]
-
-    image_result = image_model.predict_proba(processed_image)
-    image_result = image_result[0]
-
-    print(df)
-    print("Image model: " + str(image_result))
-    print("Details model: " + str(detail_result))
-
-    final_result = round(detail_result + image_result / 2)
+    detail_result = patient_details_model.predict(df)
 
 
-    return jsonify(result=str(final_result))
+    return jsonify(result=str(detail_result))
 
 
 if __name__ == '__main__':
