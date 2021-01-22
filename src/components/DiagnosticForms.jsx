@@ -11,8 +11,9 @@ const DiagnosticForms = () => {
         <div>
             {diagnosis ?
                 <div>
+                <p>{diagnosis}</p>
                     <button onClick={() => setDiagnosis(null)}> &lt; Back</button>
-                    {Number(diagnosis.result) ? <h1>Malignant</h1>  : <h1>Benign</h1>}
+                    {Number(diagnosis) ? <h1>Malignant</h1>  : <h1>Benign</h1>}
                 </div>
             :
             <div id="diagnostic-forms">

@@ -20,19 +20,22 @@ const DiagnosticFormImage = (props) => {
             formdata.append("image", formik.values.image)
             axios.post('/api/image/submit', formdata, {headers: {'Content-Type': 'multipart/form-data'}})
                 .then((response) => {
-                    props.cb(response.data)
+                    props.cb(response.data.result)
                 })
         }
     })
     return (
-        <form className="diagnostic-form" onSubmit={formik.handleSubmit}>
-            <label htmlFor="">Lesion Image</label>
-            <input name="image" type="File" onChange={e => {
-                formik.setFieldValue("image", e.currentTarget.files[0]);
-            }} />
+        <div className="diagnostic-form">
+            <h3>Image Model</h3>
+            <form onSubmit={formik.handleSubmit}>
+                <label htmlFor="">Lesion Image</label>
+                <input name="image" type="File" onChange={e => {
+                    formik.setFieldValue("image", e.currentTarget.files[0]);
+                }} />
 
-            <button type="submit">Submit</button>
-        </form>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     )
 
 }

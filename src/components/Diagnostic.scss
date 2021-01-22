@@ -1,6 +1,16 @@
 
+@import "../styles/variables";
+
+#diagnostic-forms {
+    display: flex;
+    gap: 15px;
+}
+
 .diagnostic-form {
-    flex: 0 0 100%;
+    flex: 1 0 50%;
+    border-radius: 5px;
+    border: 1px solid darken($main-color, 10%);
+    padding: 20px;
     label {
         font-size: 1.2em;
         margin-left: 3px;
@@ -12,11 +22,10 @@
         margin-left: 3px;
         color: red;
     }
-    padding: 50px 0;
-    & > * {
+    form > * {
         display: block;
     }
-    & > input, select {
+    form > input, select {
         padding: 5px;
     }
     button {
