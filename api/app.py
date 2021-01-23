@@ -84,4 +84,3 @@ def submit_details():
 
 if __name__ == '__main__':
     app.run()
-    # print(get_age_cancer_rate_data())

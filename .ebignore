@@ -1,0 +1,7 @@
+/venv/
+README.TXT
+.gitignore
+.git
+.babelrc
+/node_modules/
+/src/
