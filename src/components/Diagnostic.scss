@@ -1,16 +1,20 @@
 
 @import "../styles/variables";
 
-#diagnostic-forms {
+.diagnostic-forms {
     display: flex;
-    gap: 15px;
+    min-height: 250px;
+    gap: 10px;
+    button {
+        margin-right: 30px;
+    }
 }
 
 .diagnostic-form {
-    flex: 1 0 50%;
     border-radius: 5px;
     border: 1px solid darken($main-color, 10%);
     padding: 20px;
+    flex: 1 0 10%;
     label {
         font-size: 1.2em;
         margin-left: 3px;

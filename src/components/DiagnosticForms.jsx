@@ -4,19 +4,35 @@ import DiagnosticFormDetails from './DiagnosticFormDetails.jsx'
 import DiagnosticFormImage from './DiagnosticFormImage.jsx'
 
 
+const benignInfo = () => {
+    return (
+        <div>
+            <h3>Likely Benign</h3>
+            <p>The model predicts the lesion is likely to be benign. </p>
+        </div>
+    )
+} 
+
+const maligInfo = () => {
+    return (
+        <div>
+            <h3>Likely Malignant</h3>
+            <p>The model predicts the lesion is likely to be malignant. </p>
+        </div>
+    )
+} 
 
 const DiagnosticForms = () => {
     const [ diagnosis, setDiagnosis ] = useState();
     return (
         <div>
             {diagnosis ?
-                <div>
-                <p>{diagnosis}</p>
-                    <button onClick={() => setDiagnosis(null)}> &lt; Back</button>
-                    {Number(diagnosis) ? <h1>Malignant</h1>  : <h1>Benign</h1>}
-                </div>
+            <div className="diagnostic-forms">
+                <button onClick={() => setDiagnosis(null)}> &lt; Back</button>
+                {Number(diagnosis) ?  maligInfo()  : benignInfo() }
+            </div>
             :
-            <div id="diagnostic-forms">
+            <div className="diagnostic-forms">
                 <DiagnosticFormDetails cb={setDiagnosis} />
                 <DiagnosticFormImage cb={setDiagnosis} /> 
             </div>

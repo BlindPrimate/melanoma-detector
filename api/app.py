@@ -56,28 +56,22 @@ def submit_details():
 
     patient_dict = dict(zip(patient_dict_keys, patient_dict_values))
     df = load_df()
-    print(df)
+
     form_data = json.loads(request.form['patientData'])
 
     # assign values to patient_dict from form submission
     patient_dict['age'] = form_data['age']
     locations = ["site_head/neck", "site_upper extremity", "site_torso", "site_lower extremity"]
-    # diagnoses = ["diagnosis_unknown", "diagnosis_nevus", "diagnosis_melanoma"]
 
     form_data['sex'] = int(form_data['sex'])
 
     target_location = locations[int(form_data['location'])]
     patient_dict[target_location] = 1
 
-    # target_diagnosis = diagnoses[int(form_data['diagnosis'])]
-    # patient_dict[target_diagnosis] = 1
 
-    print(patient_dict)
 
     df = df.append(patient_dict, ignore_index=True)
     detail_result = patient_details_model.predict(df)
-    print(df)
-    print(detail_result)
 
     return jsonify(result=str(detail_result[0]))
 

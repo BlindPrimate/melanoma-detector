@@ -14,7 +14,7 @@ class App extends React.Component {
                 <h3>References</h3>
                 <ul id="references">
                     <li>
-                        <a href="#">Jupyter Notebook of ML work</a>
+                        <a href="https://www.kaggle.com/blindprimate/melanoma-final">Jupyter Notebook of ML work</a>
                     </li>
                     <li>
                         <a href="https://www.kaggle.com/c/siim-isic-melanoma-classification">SIIM-ISIIC Sample Data</a>

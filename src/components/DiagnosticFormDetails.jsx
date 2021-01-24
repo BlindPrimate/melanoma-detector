@@ -14,7 +14,7 @@ const validationSchema = Yup.object().shape({
 
 const DiagnosticFormDetails = (props) => {
     const formik = useFormik({
-        initialValues: {sex: 0, age: "", location: 0, diagnosis: 0},
+        initialValues: {sex: 1, age: "", location: 0, diagnosis: 0},
         validationSchema,
         onSubmit: (values) => {
             let formdata = new FormData()
